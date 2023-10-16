@@ -7,7 +7,7 @@ import kiteIcon from "./kite.svg";
 import masskaraSet from "./masskara-set.png";
 import masskara from "./masskara.png";
 import peopleIcon from "./people.svg";
-import waveIcon from "./wave.svg";
+import waveColors from "./wave.svg";
 import whitePaperTexture from "./white-paper-texture.png";
 
 export {
@@ -20,6 +20,6 @@ export {
   masskaraSet,
   masskara,
   peopleIcon,
-  waveIcon,
+  waveColors,
   whitePaperTexture,
 };
