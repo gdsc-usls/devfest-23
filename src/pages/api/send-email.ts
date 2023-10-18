@@ -13,7 +13,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         try {
           await handleSendEmail({
             to: "joshpersonal8@gmail.com",
-            subject: "Certificate: DevFest 2023 — Bacolod",
+            subject: `Certificate: Google DevFest 2023 — Day ${day}`,
             html: render(Email({ id, day })),
             attachments: [
               {
