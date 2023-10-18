@@ -8,12 +8,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const { method } = req;
     switch (method) {
       case "POST": {
-        await handleSendEmail({
-          to: "joshpersonal8@gmail.com",
-          subject: "Certificate: DevFest 2023 — Bacolod",
-          html: render(Email({ username: "joshxfi" })),
-        });
-        res.status(200).send("Success");
+        try {
+          await handleSendEmail({
+            to: "joshpersonal8@gmail.com",
+            subject: "Certificate: DevFest 2023 — Bacolod",
+            html: render(Email({ username: "joshxfi" })),
+          });
+          res.status(200).send("Success");
+        } catch (error) {
+          res.status(500).send(error);
+        }
+
         break;
       }
       case "GET": {

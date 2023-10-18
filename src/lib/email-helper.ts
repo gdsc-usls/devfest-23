@@ -16,7 +16,7 @@ export const handleSendEmail = async (data: Payload) => {
   });
 
   return (
-    transporter.sendMail({
+    await transporter.sendMail({
       from: process.env.NODEMAILER_EMAIL,
       ...data,
     }),
