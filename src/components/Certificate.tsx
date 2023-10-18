@@ -21,7 +21,6 @@ export default function Certificate({ value, loading }: Props) {
 
   const cardRef = useRef<HTMLImageElement>(null);
   const [imgLoading, setImgLoading] = useState(false);
-  const [imgUrl, setImgUrl] = useState("");
 
   const saveImage = useCallback(() => {
     if (cardRef.current === null) {
@@ -34,14 +33,12 @@ export default function Certificate({ value, loading }: Props) {
     toPng(cardRef.current, {
       skipAutoScale: true,
       cacheBust: true,
-      pixelRatio: 1,
+      pixelRatio: 5,
     })
       .then((dataUrl) => {
         const link = document.createElement("a");
         link.download = `certificate_${data.id}.png`;
         link.href = dataUrl;
-        setImgUrl(dataUrl);
-        console.log(dataUrl);
         link.click();
         toast.success("Image Saved!");
         setImgLoading(false);
@@ -52,24 +49,43 @@ export default function Certificate({ value, loading }: Props) {
       });
   }, [cardRef]);
 
-  const handleSubmit: FormEventHandler = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await fetch("/api/send-email", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ id: data.id, imgUrl, day: 1 }),
-      });
+  const handleSubmit: FormEventHandler = useCallback(
+    async (e) => {
+      e.preventDefault();
+      if (cardRef.current === null) {
+        return;
+      }
 
-      const resData = await res.json();
-      toast.success(resData.message);
-    } catch (err: any) {
-      toast.error(err.message);
-    }
-  };
+      toast.message("Sending email...");
+
+      toPng(cardRef.current, {
+        skipAutoScale: true,
+        cacheBust: true,
+        pixelRatio: 1,
+      })
+        .then(async (imgUrl) => {
+          try {
+            const res = await fetch("/api/send-email", {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ id: data.id, imgUrl, day: 1 }),
+            });
+
+            const resData = await res.json();
+            toast.success(resData.message);
+          } catch (err: any) {
+            toast.error(err.message);
+          }
+        })
+        .catch((err) => {
+          toast.error(err.message);
+        });
+    },
+    [cardRef]
+  );
 
   return (
     <form
