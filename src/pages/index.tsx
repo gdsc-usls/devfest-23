@@ -12,15 +12,34 @@ import {
   gdgLogo,
   masskaraSet,
 } from "@/assets/images";
+import { toast } from "sonner";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "@/config/firebase";
+import { nanoid } from "nanoid";
 
 export default function Home() {
   const { push } = useRouter();
-  const [code, setCode] = useState("");
 
-  const handleLocate: FormEventHandler = (e) => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+
+  const handleGenerate: FormEventHandler = async (e) => {
     e.preventDefault();
+    const code = nanoid(10);
 
-    push(`/cert/${code}`);
+    try {
+      await setDoc(doc(db, "certificates", code), {
+        firstName,
+        lastName,
+        email,
+      });
+
+      toast.success("Certificate Generated!");
+      push(`/cert/${code}`);
+    } catch (err: any) {
+      toast.error(err.message);
+    }
   };
 
   return (
@@ -37,25 +56,36 @@ export default function Home() {
         <Image src={devfestLogo} alt="DevFest logo" priority height={250} />
 
         <form
-          onSubmit={handleLocate}
-          className="flex flex-col gap-2 mt-8 w-full sm:max-w-[400px] max-w-[350px] "
+          onSubmit={handleGenerate}
+          className="flex flex-col gap-2 mt-8 w-full sm:max-w-[400px] max-w-[350px] text-black"
         >
           <div className="flex gap-2">
-            <Input required type="text" placeholder="First Name" />
-            <Input required type="text" placeholder="Last Name" />
+            <Input
+              required
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              type="text"
+              placeholder="First Name"
+            />
+            <Input
+              required
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              type="text"
+              placeholder="Last Name"
+            />
           </div>
           <Input
             required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             type="text"
-            maxLength={10}
-            value={code}
-            onChange={(e) => setCode(e.target.value.toUpperCase().trim())}
-            placeholder="Enter code here"
+            placeholder="Enter your email"
           />
           <div className="flex gap-2">
             <Button className="w-full bg-blue-500 text-white">Day 1</Button>
             <Button type="submit" className="w-full bg-blue-500 text-white">
-              Get Certificate
+              Generate
             </Button>
           </div>
         </form>

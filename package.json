@@ -21,6 +21,7 @@
     "eslint-config-next": "13.5.2",
     "firebase": "^10.4.0",
     "html-to-image": "^1.11.11",
+    "nanoid": "^5.0.2",
     "next": "13.5.2",
     "nodemailer": "^6.9.6",
     "nprogress": "^0.2.0",

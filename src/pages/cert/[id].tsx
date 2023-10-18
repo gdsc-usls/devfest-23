@@ -13,5 +13,17 @@ export default function Cert() {
     doc(db, `certificates/${id?.toString().toUpperCase()}`)
   );
 
+  // useEffect(() => {
+  //   if (!loading) {
+  //     if (!value?.exists()) {
+  //       push("/");
+  //       toast.error("Certificate not found!");
+  //       return;
+  //     }
+  //
+  //     toast.success("Certificate generated!");
+  //   }
+  // }, [loading, value]);
+
   return <Certificate value={value} loading={loading} />;
 }

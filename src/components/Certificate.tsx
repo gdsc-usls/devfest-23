@@ -3,14 +3,7 @@ import Image from "next/image";
 import { toast } from "sonner";
 import { toPng } from "html-to-image";
 import Tilt from "react-parallax-tilt";
-import { useRouter } from "next/router";
-import {
-  FormEventHandler,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { FormEventHandler, useCallback, useRef, useState } from "react";
 import { DocumentData, DocumentSnapshot } from "firebase/firestore";
 
 import Button from "./Button";
@@ -26,7 +19,6 @@ type Props = {
 export default function Certificate({ value, loading }: Props) {
   const data = { ...value?.data(), id: value?.id } as Attendee;
 
-  const { push } = useRouter();
   const cardRef = useRef<HTMLImageElement>(null);
   const [imgLoading, setImgLoading] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
@@ -79,18 +71,6 @@ export default function Certificate({ value, loading }: Props) {
     }
   };
 
-  // useEffect(() => {
-  //   if (!loading) {
-  //     if (!value?.exists()) {
-  //       push("/");
-  //       toast.error("Certificate not found!");
-  //       return;
-  //     }
-  //
-  //     toast.success("Certificate generated!");
-  //   }
-  // }, [loading, value]);
-
   return (
     <form
       onSubmit={handleSubmit}
@@ -116,11 +96,20 @@ export default function Certificate({ value, loading }: Props) {
               <Icons.arrowLeft className="h-10 w-10" />
             </Link>
 
-            <Button type="button" disabled={imgLoading} onClick={saveImage}>
+            <Button
+              type="button"
+              className="bg-blue-500 text-white"
+              disabled={imgLoading}
+              onClick={saveImage}
+            >
               Download
             </Button>
 
-            <Button type="submit" disabled={imgLoading}>
+            <Button
+              type="submit"
+              className="bg-blue-500 text-white"
+              disabled={imgLoading}
+            >
               Send to Email
             </Button>
           </div>

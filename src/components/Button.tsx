@@ -4,7 +4,7 @@ export default function Button({
 }: React.ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <button
-      className={`bg-white hover:bg-gray-100 transition-colors px-6 py-3 rounded text-black font-medium text-sm sm:text-base ${className}`}
+      className={`transition-colors px-6 py-3 rounded font-medium text-sm sm:text-base ${className}`}
       {...rest}
     >
       {rest.children}
