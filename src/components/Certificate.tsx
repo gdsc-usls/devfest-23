@@ -47,7 +47,7 @@ export default function Certificate({ value, loading }: Props) {
         toast.error(err.message);
         setImgLoading(false);
       });
-  }, [cardRef]);
+  }, [cardRef, data.id]);
 
   const handleSubmit: FormEventHandler = useCallback(
     async (e) => {
@@ -89,7 +89,7 @@ export default function Certificate({ value, loading }: Props) {
           toast.error(err.message);
         });
     },
-    [cardRef]
+    [cardRef, data.id, data.email]
   );
 
   return (
