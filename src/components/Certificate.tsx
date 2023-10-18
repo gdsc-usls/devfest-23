@@ -61,7 +61,7 @@ export default function Certificate({ value, loading }: Props) {
 
       toast.success("Certificate generated!");
     }
-  }, [loading, value]);
+  }, [loading, value, data.id]);
 
   return (
     <section className="flex flex-col items-center justify-center min-h-screen">
