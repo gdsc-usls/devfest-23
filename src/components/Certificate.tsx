@@ -71,7 +71,12 @@ export default function Certificate({ value, loading }: Props) {
                 Accept: "application/json",
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({ id: data.id, imgUrl, day: 1 }),
+              body: JSON.stringify({
+                id: data.id,
+                email: data.email,
+                imgUrl,
+                day: 1,
+              }),
             });
 
             const resData = await res.json();

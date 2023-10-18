@@ -1,4 +1,6 @@
 export type Attendee = {
   id: string;
-  fullName: string;
+  firstName: string;
+  lastName: string;
+  email: string;
 };
