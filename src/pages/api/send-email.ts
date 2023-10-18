@@ -5,24 +5,32 @@ import Email from "@/emails/Email";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const { method } = req;
+    const { method, body } = req;
     switch (method) {
       case "POST": {
+        const { id, imgUrl, day } = body;
+
         try {
           await handleSendEmail({
             to: "joshpersonal8@gmail.com",
             subject: "Certificate: DevFest 2023 — Bacolod",
-            html: render(Email({ username: "joshxfi" })),
+            html: render(Email({ id, day })),
+            attachments: [
+              {
+                filename: `Certificate_${id}.png`,
+                path: imgUrl,
+              },
+            ],
           });
-          res.status(200).send("Success");
-        } catch (error) {
-          res.status(500).send(error);
+          return res.status(200).json({ message: "Success" });
+        } catch (err: any) {
+          res.status(500).json({ message: err.message });
         }
 
         break;
       }
       case "GET": {
-        res.status(200).send(req);
+        res.status(200).json(req);
         break;
       }
       default:

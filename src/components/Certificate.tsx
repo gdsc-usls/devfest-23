@@ -4,7 +4,13 @@ import { toast } from "sonner";
 import { toPng } from "html-to-image";
 import Tilt from "react-parallax-tilt";
 import { useRouter } from "next/router";
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  FormEventHandler,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { DocumentData, DocumentSnapshot } from "firebase/firestore";
 
 import Button from "./Button";
@@ -23,6 +29,7 @@ export default function Certificate({ value, loading }: Props) {
   const { push } = useRouter();
   const cardRef = useRef<HTMLImageElement>(null);
   const [imgLoading, setImgLoading] = useState(false);
+  const [imgUrl, setImgUrl] = useState("");
 
   const saveImage = useCallback(() => {
     if (cardRef.current === null) {
@@ -35,12 +42,14 @@ export default function Certificate({ value, loading }: Props) {
     toPng(cardRef.current, {
       skipAutoScale: true,
       cacheBust: true,
-      pixelRatio: 5,
+      pixelRatio: 1,
     })
       .then((dataUrl) => {
         const link = document.createElement("a");
         link.download = `certificate_${data.id}.png`;
         link.href = dataUrl;
+        setImgUrl(dataUrl);
+        console.log(dataUrl);
         link.click();
         toast.success("Image Saved!");
         setImgLoading(false);
@@ -51,20 +60,42 @@ export default function Certificate({ value, loading }: Props) {
       });
   }, [cardRef]);
 
-  useEffect(() => {
-    if (!loading) {
-      if (!value?.exists()) {
-        push("/");
-        toast.error("Certificate not found!");
-        return;
-      }
+  const handleSubmit: FormEventHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: data.id, imgUrl, day: 1 }),
+      });
 
-      toast.success("Certificate generated!");
+      const resData = await res.json();
+      toast.success(resData.message);
+    } catch (err: any) {
+      toast.error(err.message);
     }
-  }, [loading, value, data.id]);
+  };
+
+  // useEffect(() => {
+  //   if (!loading) {
+  //     if (!value?.exists()) {
+  //       push("/");
+  //       toast.error("Certificate not found!");
+  //       return;
+  //     }
+  //
+  //     toast.success("Certificate generated!");
+  //   }
+  // }, [loading, value]);
 
   return (
-    <section className="flex flex-col items-center justify-center min-h-screen">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col items-center justify-center min-h-screen"
+    >
       {loading ? (
         <Icons.spinner className="w-6 h-6" />
       ) : (
@@ -88,9 +119,13 @@ export default function Certificate({ value, loading }: Props) {
             <Button type="button" disabled={imgLoading} onClick={saveImage}>
               Download
             </Button>
+
+            <Button type="submit" disabled={imgLoading}>
+              Send to Email
+            </Button>
           </div>
         </>
       )}
-    </section>
+    </form>
   );
 }

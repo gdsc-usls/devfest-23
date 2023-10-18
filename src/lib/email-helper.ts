@@ -1,9 +1,11 @@
 import nodemailer from "nodemailer";
+import Mail from "nodemailer/lib/mailer";
 
 type Payload = {
   to: string;
   subject: string;
   html: string;
+  attachments: Mail.Attachment[];
 };
 
 export const handleSendEmail = async (data: Payload) => {
