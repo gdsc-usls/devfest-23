@@ -53,7 +53,7 @@ export const VercelInviteUserEmail = ({
           <Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] w-[465px]">
             <Section className="mt-[32px]">
               <Img
-                src={`${baseUrl}/images/devfest.png`}
+                src={`${baseUrl}/devfest.png`}
                 width="400"
                 height="200"
                 alt="Vercel"
@@ -87,7 +87,7 @@ export const VercelInviteUserEmail = ({
                 </Column>
                 <Column align="center">
                   <Img
-                    src={`${baseUrl}/static/vercel-arrow.png`}
+                    src={`${baseUrl}/devfest.png`}
                     width="12"
                     height="9"
                     alt="invited you to"
@@ -127,8 +127,8 @@ export const VercelInviteUserEmail = ({
               located in{" "}
               <span className="text-black">{inviteFromLocation}</span>. If you
               were not expecting this invitation, you can ignore this email. If
-              you are concerned about your account&apos;s safety, please reply to
-              this email to get in touch with us.
+              you are concerned about your account&apos;s safety, please reply
+              to this email to get in touch with us.
             </Text>
           </Container>
         </Body>
