@@ -1,11 +1,16 @@
 import { ReactNode } from "react";
-import { Inter } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export default function Layout({ children }: { children: ReactNode }) {
+export default function Layout({
+  className,
+  children,
+}: {
+  className?: string;
+  children: ReactNode;
+}) {
   return (
-    <main className={`bg-white min-h-screen mx-auto ${inter.className}`}>
+    <main
+      className={`bg-white min-h-screen mx-auto font-google-reg ${className}`}
+    >
       {children}
     </main>
   );
