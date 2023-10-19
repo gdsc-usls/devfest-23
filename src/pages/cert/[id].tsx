@@ -15,9 +15,7 @@ export default function Cert() {
   const {
     query: { id },
   } = useRouter();
-  const [value, loading] = useDocumentOnce(
-    doc(db, `certificates/${id?.toString().toUpperCase()}`)
-  );
+  const [value, loading] = useDocumentOnce(doc(db, `certificates/${id}`));
 
   const cardRef = useRef<HTMLDivElement>(null);
   const [imgLoading, setImgLoading] = useState(false);

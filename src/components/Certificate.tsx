@@ -26,6 +26,7 @@ export default function Certificate({ value, ref }: Props) {
       <div ref={ref} className="grid place-items-center">
         <Image
           priority
+          quality={100}
           width={1864}
           height={1190}
           src="/images/certificates/cert-day1.png"
@@ -34,9 +35,9 @@ export default function Certificate({ value, ref }: Props) {
         />
 
         <h2
-          className={`absolute z-10 text-[#171717] text-4xl ${googleBold.className}`}
+          className={`absolute z-10 md:mt-20 mt-12 text-[#171717] text-4xl [font-size:clamp(18px,3vw,40px)] ${googleBold.className}`}
         >
-          {data.firstName} {data.lastName} test
+          {data.firstName} {data.lastName}
         </h2>
       </div>
     </Tilt>
