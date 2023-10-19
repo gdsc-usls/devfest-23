@@ -4,7 +4,16 @@ import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Image from "next/image";
 
-import { gdgLogo, devfestMain, wave, bg } from "../../public";
+import {
+  gdgLogo,
+  devfestMain,
+  wave,
+  bg,
+  firebase,
+  mask,
+  kite,
+  sugarcane,
+} from "../../public";
 
 import { toast } from "sonner";
 import { doc, setDoc } from "firebase/firestore";
@@ -39,8 +48,31 @@ export default function Home() {
   };
 
   return (
-    <section className="h-screen py-20">
-      {/* <Image src={masskara} alt="MassKara Illustration" priority height={280} /> */}
+    <section className="h-screen py-20 relative">
+      <Image
+        height={250}
+        src={kite}
+        alt="Kite"
+        className="absolute top-96 left-44 z-40"
+      />
+      <Image
+        height={320}
+        src={firebase}
+        alt="Firebase logo"
+        className="absolute top-20  z-20"
+      />
+      <Image
+        height={360}
+        src={mask}
+        alt="MassKara mask"
+        className="absolute right-10  z-20"
+      />
+      <Image
+        height={280}
+        src={sugarcane}
+        alt="Sugarcane"
+        className="absolute right-20 bottom-0 z-40"
+      />
       <div className="glassmorph h-full z-30 relative w-3/4 mx-auto">
         <div className="gap-5 flex flex-col h-full items-center pt-28">
           <Image
@@ -95,12 +127,12 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="absolute overflow-hidden text-black  left-0 bottom-0 right-0">
+      <div className="absolute h-full overflow-hidden text-black left-0 bottom-0 right-0">
         <Image
           src={bg}
           alt="Grid bg"
           priority
-          className="object-cover pointer-events-none  object-left z-10 relative opacity-50"
+          className="pointer-events-none object-left z-10 relative opacity-50"
         />
       </div>
 
