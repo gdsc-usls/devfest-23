@@ -9,7 +9,6 @@ import { DocumentData, DocumentSnapshot } from "firebase/firestore";
 import Button from "./Button";
 import { Icons } from "./Icons";
 import { Attendee } from "@/types";
-import sampleImg from "public/images/certificates/sample.png";
 
 type Props = {
   value: DocumentSnapshot<DocumentData, DocumentData> | undefined;
@@ -95,21 +94,25 @@ export default function Certificate({ value, loading }: Props) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col items-center justify-center min-h-screen"
+      className="flex flex-col items-center justify-center min-h-screen px-8"
     >
       {loading ? (
         <Icons.spinner className="w-6 h-6" />
       ) : (
         <>
-          <Tilt className="rounded-xl overflow-hidden">
+          <Tilt className="rounded-xl overflow-hidden relative">
             <Image
               priority
-              sizes="100vw"
-              ref={cardRef}
-              src={sampleImg}
-              className="object-contain w-full h-auto max-w-[600px] pointer-events-none"
+              width={1864}
+              height={1190}
+              src="/images/certificates/cert-day1.png"
+              className="object-contain w-full h-auto max-w-[800px] pointer-events-none"
               alt="sample image"
             />
+
+            <h2 className="absolute text-[#171717] text-4xl">
+              {data.firstName} {data.lastName}
+            </h2>
           </Tilt>
 
           <div className="flex items-center mt-8 space-x-4">
