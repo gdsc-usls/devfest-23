@@ -7,7 +7,13 @@ import localFont from "next/font/local";
 import { useRouter } from "next/router";
 import { doc } from "firebase/firestore";
 import { useDocumentOnce } from "react-firebase-hooks/firestore";
-import { FormEventHandler, useCallback, useRef, useState } from "react";
+import {
+  FormEventHandler,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import { db } from "@/config/firebase";
 import Button from "@/components/Button";
@@ -23,6 +29,7 @@ const googleBold = localFont({
 
 export default function Cert() {
   const {
+    push,
     query: { id },
   } = useRouter();
   const [value, loading] = useDocumentOnce(doc(db, `certificates/${id}`));
@@ -112,6 +119,8 @@ export default function Cert() {
     >
       {loading ? (
         <Icons.spinner className="w-6 h-6" />
+      ) : !data.email ? (
+        <p>Certificate not found</p>
       ) : (
         <>
           <Tilt className="rounded-xl overflow-hidden relative">
