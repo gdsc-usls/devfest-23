@@ -42,7 +42,7 @@ export default function Cert() {
     toPng(cardRef.current, {
       skipAutoScale: true,
       cacheBust: true,
-      pixelRatio: 5,
+      pixelRatio: 3,
     })
       .then((dataUrl) => {
         const link = document.createElement("a");
