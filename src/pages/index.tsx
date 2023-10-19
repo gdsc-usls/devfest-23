@@ -68,13 +68,13 @@ export default function Home() {
         height={320}
         src={firebase}
         alt="Firebase logo"
-        className="absolute top-20  z-20"
+        className="absolute md:top-20 top-[55%] scale-75 lg:scale-100 z-20"
       />
       <Image
         height={360}
         src={mask}
         alt="MassKara mask"
-        className="absolute right-10  z-20"
+        className="absolute md:right-10 right-0 scale-75 lg:scale-100 z-20 md:top-0 top-[55%]"
       />
       <Image
         height={280}
@@ -97,7 +97,7 @@ export default function Home() {
             onSubmit={handleGenerate}
             className="flex flex-col gap-2 mt-8 w-full sm:max-w-[400px] max-w-[350px] text-black"
           >
-            <div className="flex gap-2 [&>input]:text-white">
+            <div className="flex gap-2 [&>input]:bg-white">
               <Input
                 required
                 value={firstName}
@@ -117,7 +117,7 @@ export default function Home() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              type="text"
+              type="email"
               placeholder="Enter your email"
             />
             <div
@@ -135,21 +135,12 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="absolute h-full overflow-hidden text-black left-0 bottom-0 right-0">
-        <Image
-          src={bg}
-          alt="Grid bg"
-          priority
-          className="pointer-events-none object-left z-10 relative opacity-50"
-        />
-      </div>
-
-      <div className="absolute overflow-hidden text-black  left-0 bottom-0 right-0">
+      <div className="absolute overflow-hidden left-0 bottom-0 right-0">
         <Image
           src={wave}
           alt="RGBY Wave"
           priority
-          className="pointer-events-none object-cover object-left z-10 relative"
+          className="pointer-events-none object-cover object-left z-20 relative"
         />
       </div>
     </section>

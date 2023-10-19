@@ -15,7 +15,7 @@ import { Icons } from "@/components/Icons";
 import { Attendee } from "@/types";
 
 const googleBold = localFont({
-  src: "../../public/fonts/Google-Sans-Bold.woff2",
+  src: "../../../public/fonts/Google-Sans-Bold.woff2",
   display: "swap",
   weight: "600",
   variable: "--font-google-bold",
@@ -108,7 +108,7 @@ export default function Cert() {
   return (
     <form
       onSubmit={handleSendEmail}
-      className="flex flex-col items-center justify-center min-h-screen px-8"
+      className="flex flex-col items-center justify-center min-h-screen px-8 z-50 relative"
     >
       {loading ? (
         <Icons.spinner className="w-6 h-6" />
