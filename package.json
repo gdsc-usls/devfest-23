@@ -11,6 +11,7 @@
     "email-export": "email export --dir src/emails"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.17",
     "@react-email/components": "^0.0.7",
     "@react-email/render": "^0.0.7",
     "@types/node": "20.6.3",

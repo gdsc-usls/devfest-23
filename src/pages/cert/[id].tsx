@@ -15,7 +15,7 @@ import { Icons } from "@/components/Icons";
 import { Attendee } from "@/types";
 
 const googleBold = localFont({
-  src: "../../assets/fonts/Google-Sans-Bold.woff2",
+  src: "../../public/fonts/Google-Sans-Bold.woff2",
   display: "swap",
   weight: "600",
   variable: "--font-google-bold",
