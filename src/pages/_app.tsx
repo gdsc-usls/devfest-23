@@ -16,7 +16,7 @@ Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 
 const googleReg = localFont({
-  src: "../assets/fonts/Google-Sans-Regular.woff2",
+  src: "./Google-Sans-Regular.woff2",
   display: "swap",
   weight: "400",
   variable: "--font-google-reg",
