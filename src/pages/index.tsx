@@ -57,7 +57,7 @@ export default function Home() {
   };
 
   return (
-    <section className="h-screen py-20 relative">
+    <section className="h-screen lg:py-20 py-10 relative">
       <Image
         height={250}
         src={kite}
