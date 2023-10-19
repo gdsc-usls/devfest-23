@@ -62,7 +62,7 @@ export default function Home() {
         height={250}
         src={kite}
         alt="Kite"
-        className="absolute top-96 left-44 z-40"
+        className="absolute pointer-events-none hidden xl:block top-96 left-44 z-40"
       />
       <Image
         height={320}
@@ -80,9 +80,9 @@ export default function Home() {
         height={280}
         src={sugarcane}
         alt="Sugarcane"
-        className="absolute right-20 bottom-0 z-40"
+        className="absolute right-20 bottom-0 z-40 pointer-events-none"
       />
-      <div className="glassmorph h-full z-30 relative w-3/4 mx-auto">
+      <div className="glassmorph h-full z-30 relative w-[90%] px-7 md:w-3/4 mx-auto">
         <div className="gap-5 flex flex-col h-full items-center pt-28">
           <Image
             src={gdgLogo}
@@ -91,13 +91,13 @@ export default function Home() {
             className=""
             height={30}
           />
-          <Image src={devfestMain} alt="DevFest logo" priority height={190} />
+          <Image src={devfestMain} alt="DevFest logo" priority height={180} />
 
           <form
             onSubmit={handleGenerate}
             className="flex flex-col gap-2 mt-8 w-full sm:max-w-[400px] max-w-[350px] text-black"
           >
-            <div className="flex gap-2">
+            <div className="flex gap-2 [&>input]:text-white">
               <Input
                 required
                 value={firstName}
@@ -121,7 +121,7 @@ export default function Home() {
               placeholder="Enter your email"
             />
             <div
-              className={`flex gap-2 font-google-bold ${googleMedium.className}`}
+              className={`flex gap-2 w-full font-google-bold ${googleMedium.className}`}
             >
               <Dropdown setDay={setDay} />
               <Button
