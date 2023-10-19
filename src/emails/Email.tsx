@@ -32,9 +32,10 @@ export const CertificateEmail = ({ id, day = 1 }: Props) => {
               <strong>GDG Bacolod</strong>
             </Heading>
             <Text className="text-black text-[14px] leading-[24px]">
-              We're excited to let you know that your certificate for Day {day}{" "}
-              of Google DevFest 2023 is ready and waiting for you. 🎉 To claim
-              it, just click the button below or check out the attached image:
+              We&apos;re excited to let you know that your certificate for Day{" "}
+              {day} of Google DevFest 2023 is ready and waiting for you. 🎉 To
+              claim it, just click the button below or check out the attached
+              image:
             </Text>
             <Section className="text-center mt-[32px] mb-[32px]">
               <Button

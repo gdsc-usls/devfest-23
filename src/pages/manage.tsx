@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
+import { nanoid } from "nanoid";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -7,47 +8,14 @@ import { Attendee } from "@/types";
 import Input from "@/components/Input";
 import { db } from "../config/firebase";
 import Button from "@/components/Button";
-import { nanoid } from "nanoid";
 
 export default function Manage() {
-  const [certificateId, setCertificateId] = useState("");
-
   const [attendees, setAttendees] = useState("");
   const [parsedAttendees, setParsedAttendees] = useState<Attendee[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-
   const [authorized, setAuthorized] = useState(false);
   const [password, setPassword] = useState("");
-
-  const handleAdd = async () => {
-    setLoading(true);
-
-    try {
-      const payload: Omit<Attendee, "id"> = {
-        firstName,
-        lastName,
-        email,
-      };
-
-      await setDoc(doc(db, "certificates", certificateId), payload);
-      toast.success("Certificate added");
-
-      setTimeout(() => {
-        setCertificateId("");
-        setFirstName("");
-        setLastName("");
-        setEmail("");
-      }, 500);
-    } catch (err: any) {
-      toast.error(err.message);
-    }
-
-    setLoading(false);
-  };
 
   const handleParse = () => {
     setLoading(true);
