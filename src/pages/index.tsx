@@ -19,6 +19,15 @@ import { toast } from "sonner";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "@/config/firebase";
 import { nanoid } from "nanoid";
+import localFont from "next/font/local";
+import Dropdown from "@/components/Dropdown";
+
+const googleMedium = localFont({
+  src: "../../public/fonts/Google-Sans-Medium.ttf",
+  display: "swap",
+  weight: "600",
+  // variable: "--font-google-bold",
+});
 
 export default function Home() {
   const { push } = useRouter();
@@ -111,15 +120,14 @@ export default function Home() {
               type="text"
               placeholder="Enter your email"
             />
-            <div className="flex gap-2">
+            <div
+              className={`flex gap-2 font-google-bold ${googleMedium.className}`}
+            >
+              <Dropdown setDay={setDay} />
               <Button
-                type="button"
-                onClick={() => setDay(2)}
-                className="w-full bg-blue-500 text-white"
+                type="submit"
+                className="cursor-pointer transition-all bg-green-500 text-white px-6 py-2 rounded-lg border-green-600 border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px] w-full"
               >
-                Day 2
-              </Button>
-              <Button type="submit" className="w-full bg-blue-500 text-white">
                 Generate
               </Button>
             </div>
