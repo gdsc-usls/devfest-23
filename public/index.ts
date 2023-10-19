@@ -5,5 +5,6 @@ import kite from "./kite.svg";
 import mask from "./mask.png";
 import wave from "./wave.svg";
 import sugarcane from "./sugarcane.png";
+import bg from "./bg.jpg";
 
-export { devfestMain, firebase, gdgLogo, kite, mask, wave, sugarcane };
+export { devfestMain, firebase, gdgLogo, kite, mask, wave, sugarcane, bg };
