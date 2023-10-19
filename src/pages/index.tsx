@@ -23,6 +23,7 @@ export default function Home() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [day, setDay] = useState<1 | 2>(1);
 
   const handleGenerate: FormEventHandler = async (e) => {
     e.preventDefault();
@@ -33,6 +34,7 @@ export default function Home() {
         firstName,
         lastName,
         email,
+        day,
       });
 
       toast.success("Certificate Generated!");
@@ -83,7 +85,13 @@ export default function Home() {
             placeholder="Enter your email"
           />
           <div className="flex gap-2">
-            <Button className="w-full bg-blue-500 text-white">Day 1</Button>
+            <Button
+              type="button"
+              onClick={() => setDay(2)}
+              className="w-full bg-blue-500 text-white"
+            >
+              Day 2
+            </Button>
             <Button type="submit" className="w-full bg-blue-500 text-white">
               Generate
             </Button>

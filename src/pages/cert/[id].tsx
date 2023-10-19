@@ -7,13 +7,7 @@ import localFont from "next/font/local";
 import { useRouter } from "next/router";
 import { doc } from "firebase/firestore";
 import { useDocumentOnce } from "react-firebase-hooks/firestore";
-import {
-  FormEventHandler,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { FormEventHandler, useCallback, useRef, useState } from "react";
 
 import { db } from "@/config/firebase";
 import Button from "@/components/Button";
@@ -29,7 +23,6 @@ const googleBold = localFont({
 
 export default function Cert() {
   const {
-    push,
     query: { id },
   } = useRouter();
   const [value, loading] = useDocumentOnce(doc(db, `certificates/${id}`));
@@ -90,9 +83,9 @@ export default function Cert() {
               },
               body: JSON.stringify({
                 id: value?.id,
-                email: value?.data()?.email,
+                email: data.email,
                 imgUrl,
-                day: 1,
+                day: data?.day,
               }),
             });
 
@@ -109,7 +102,7 @@ export default function Cert() {
           setImgLoading(false);
         });
     },
-    [cardRef, value?.id, value?.data()?.email]
+    [cardRef, value?.id, data.email, data?.day]
   );
 
   return (
@@ -130,7 +123,7 @@ export default function Cert() {
                 quality={100}
                 width={1864}
                 height={1190}
-                src="/images/certificates/cert-day1.png"
+                src={`/images/certificates/cert-day${data.day}.png`}
                 className="object-contain w-full h-auto max-w-[800px] pointer-events-none"
                 alt="sample image"
               />
