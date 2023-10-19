@@ -58,7 +58,7 @@ export default function Cert() {
       });
   }, [cardRef, value?.id]);
 
-  const handleSubmit: FormEventHandler = useCallback(
+  const handleSendEmail: FormEventHandler = useCallback(
     async (e) => {
       e.preventDefault();
       if (cardRef.current === null) {
@@ -66,6 +66,7 @@ export default function Cert() {
       }
 
       toast.message("Sending email...");
+      setImgLoading(true);
 
       toPng(cardRef.current, {
         skipAutoScale: true,
@@ -90,12 +91,15 @@ export default function Cert() {
 
             const resData = await res.json();
             toast.success(resData.message);
+            setImgLoading(false);
           } catch (err: any) {
             toast.error(err.message);
+            setImgLoading(false);
           }
         })
         .catch((err) => {
           toast.error(err.message);
+          setImgLoading(false);
         });
     },
     [cardRef, value?.id, value?.data()?.email]
@@ -103,7 +107,7 @@ export default function Cert() {
 
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={handleSendEmail}
       className="flex flex-col items-center justify-center min-h-screen px-8"
     >
       {loading ? (
@@ -130,26 +134,32 @@ export default function Cert() {
             </div>
           </Tilt>
           <div className="flex items-center mt-8 space-x-4">
-            <Link href="/">
-              <Icons.arrowLeft className="h-10 w-10" />
-            </Link>
+            {imgLoading ? (
+              <Icons.spinner className="w-6 h-6" />
+            ) : (
+              <>
+                <Link href="/">
+                  <Icons.arrowLeft className="h-10 w-10" />
+                </Link>
 
-            <Button
-              type="button"
-              className="bg-blue-500 text-white"
-              disabled={imgLoading}
-              onClick={saveImage}
-            >
-              Download
-            </Button>
+                <Button
+                  type="button"
+                  className="bg-blue-500 text-white"
+                  disabled={imgLoading}
+                  onClick={saveImage}
+                >
+                  Download
+                </Button>
 
-            <Button
-              type="submit"
-              className="bg-blue-500 text-white"
-              disabled={imgLoading}
-            >
-              Send to Email
-            </Button>
+                <Button
+                  type="submit"
+                  className="bg-blue-500 text-white"
+                  disabled={imgLoading}
+                >
+                  Send to Email
+                </Button>
+              </>
+            )}
           </div>
         </>
       )}
