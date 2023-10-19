@@ -3,15 +3,9 @@ import { useRouter } from "next/router";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Image from "next/image";
-import {
-  devfestLogo,
-  gdgWtmLogo,
-  // masskara,
-  waveColors,
-  whitePaperTexture,
-  gdgLogo,
-  masskaraSet,
-} from "@/assets/images";
+
+import { gdgLogo, devfestMain, wave } from "../../public";
+
 import { toast } from "sonner";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "@/config/firebase";
@@ -48,14 +42,8 @@ export default function Home() {
     <section className="h-screen p-10 relative overflow-hidden">
       {/* <Image src={masskara} alt="MassKara Illustration" priority height={280} /> */}
       <div className="gap-5 mt-20 flex flex-col overflow-hidden relative items-center justify-between z-30">
-        <Image
-          src={gdgLogo}
-          alt="DevFest logo"
-          priority
-          className=""
-          height={30}
-        />
-        <Image src={devfestLogo} alt="DevFest logo" priority height={250} />
+        <Image src={gdgLogo} alt="GDG logo" priority className="" height={30} />
+        <Image src={devfestMain} alt="DevFest logo" priority height={200} />
 
         <form
           onSubmit={handleGenerate}
@@ -99,33 +87,21 @@ export default function Home() {
         </form>
       </div>
 
-      <div>
+      <div className="absolute overflow-hidden text-black  left-0 bottom-0 right-0">
         <Image
-          src={masskaraSet}
-          alt="GDG & WTM Logo"
+          src={wave}
+          alt="RGBY Wave"
           priority
-          className="absolute -bottom-7 -right-14 z-20"
-          height={500}
+          className="object-cover object-left z-10 relative"
         />
+      </div>
+
+      <div className="absolute overflow-hidden text-black  left-0 bottom-0 right-0">
         <Image
-          src={gdgWtmLogo}
-          alt="GDG & WTM Logo"
+          src={wave}
+          alt="RGBY Wave"
           priority
-          className="absolute bottom-7 left-7 z-20"
-          height={350}
-        />
-        <div className="absolute overflow-hidden text-black  left-0 bottom-0 right-0">
-          <Image
-            src={waveColors}
-            alt="RGBY Wave"
-            priority
-            className="object-cover object-left z-10 relative"
-          />
-        </div>
-        <Image
-          src={whitePaperTexture}
-          alt="White Paper Texture"
-          className="opacity-50 absolute left-0 top-0 object-cover h-screen w-screen"
+          className="object-cover object-left z-10 relative"
         />
       </div>
     </section>
