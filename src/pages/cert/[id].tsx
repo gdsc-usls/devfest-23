@@ -92,6 +92,8 @@ export default function Cert() {
                 email: data.email,
                 imgUrl,
                 day: data?.day,
+                firstName: data?.firstName,
+                lastName: data?.lastName,
               }),
             });
 
