@@ -43,6 +43,7 @@ export default function Dropdown({
             <Menu.Item>
               {({ active }) => (
                 <button
+                  type='button'
                   disabled={process.env.NEXT_PUBLIC_DAY === "2"}
                   onClick={() => setDay(1)}
                   className={`${
@@ -56,6 +57,7 @@ export default function Dropdown({
             <Menu.Item>
               {({ active }) => (
                 <button
+                  type="button"
                   disabled={process.env.NEXT_PUBLIC_DAY === "1"}
                   onClick={() => setDay(2)}
                   className={`${
