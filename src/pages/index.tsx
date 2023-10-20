@@ -3,19 +3,30 @@ import { useRouter } from "next/router";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Image from "next/image";
+
 import {
-  devfestLogo,
-  gdgWtmLogo,
-  // masskara,
-  waveColors,
-  whitePaperTexture,
   gdgLogo,
-  masskaraSet,
-} from "@/assets/images";
+  devfestMain,
+  wave,
+  firebase,
+  mask,
+  kite,
+  sugarcane,
+} from "../../public";
+
 import { toast } from "sonner";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "@/config/firebase";
 import { nanoid } from "nanoid";
+import localFont from "next/font/local";
+import Dropdown from "@/components/Dropdown";
+
+const googleMedium = localFont({
+  src: "../../public/fonts/Google-Sans-Medium.ttf",
+  display: "swap",
+  weight: "600",
+  // variable: "--font-google-bold",
+});
 
 export default function Home() {
   const { push } = useRouter();
@@ -45,87 +56,90 @@ export default function Home() {
   };
 
   return (
-    <section className="h-screen p-10 relative overflow-hidden">
-      {/* <Image src={masskara} alt="MassKara Illustration" priority height={280} /> */}
-      <div className="gap-5 mt-20 flex flex-col overflow-hidden relative items-center justify-between z-30">
-        <Image
-          src={gdgLogo}
-          alt="DevFest logo"
-          priority
-          className=""
-          height={30}
-        />
-        <Image src={devfestLogo} alt="DevFest logo" priority height={250} />
-
-        <form
-          onSubmit={handleGenerate}
-          className="flex flex-col gap-2 mt-8 w-full sm:max-w-[400px] max-w-[350px] text-black"
-        >
-          <div className="flex gap-2">
-            <Input
-              required
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              type="text"
-              placeholder="First Name"
-            />
-            <Input
-              required
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              type="text"
-              placeholder="Last Name"
-            />
-          </div>
-          <Input
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            type="text"
-            placeholder="Enter your email"
+    <section className="h-screen lg:py-20 py-10 relative">
+      <Image
+        height={250}
+        src={kite}
+        alt="Kite"
+        className="absolute pointer-events-none hidden xl:block top-96 left-44 z-40"
+      />
+      <Image
+        height={320}
+        src={firebase}
+        alt="Firebase logo"
+        className="absolute md:top-20 top-[55%] scale-75 lg:scale-100 z-20"
+      />
+      <Image
+        height={360}
+        src={mask}
+        alt="MassKara mask"
+        className="absolute md:right-10 right-0 scale-75 lg:scale-100 z-20 md:top-0 top-[55%]"
+      />
+      <Image
+        height={280}
+        src={sugarcane}
+        alt="Sugarcane"
+        className="absolute right-20 bottom-0 z-40 pointer-events-none hidden lg:block"
+      />
+      <div className="glassmorph h-full z-30 relative w-[90%] px-7 md:w-3/4 mx-auto">
+        <div className="gap-5 flex flex-col h-full items-center pt-28">
+          <Image
+            src={gdgLogo}
+            alt="GDG logo"
+            priority
+            className=""
+            height={30}
           />
-          <div className="flex gap-2">
-            <Button
-              type="button"
-              onClick={() => setDay(2)}
-              className="w-full bg-blue-500 text-white"
+          <Image src={devfestMain} alt="DevFest logo" priority height={180} />
+
+          <form
+            onSubmit={handleGenerate}
+            className="flex flex-col gap-2 mt-8 w-full sm:max-w-[400px] max-w-[350px] text-black"
+          >
+            <div className="flex gap-2 [&>input]:bg-white">
+              <Input
+                required
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                type="text"
+                placeholder="First Name"
+              />
+              <Input
+                required
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                type="text"
+                placeholder="Last Name"
+              />
+            </div>
+            <Input
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              type="email"
+              placeholder="Enter your email"
+            />
+            <div
+              className={`flex gap-2 w-full font-google-bold ${googleMedium.className}`}
             >
-              Day 2
-            </Button>
-            <Button type="submit" className="w-full bg-blue-500 text-white">
-              Generate
-            </Button>
-          </div>
-        </form>
+              <Dropdown day={day} setDay={setDay} />
+              <Button
+                type="submit"
+                className="cursor-pointer transition-all bg-green-500 text-white px-6 py-2 rounded-lg border-green-600 border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px] w-full"
+              >
+                Generate
+              </Button>
+            </div>
+          </form>
+        </div>
       </div>
 
-      <div>
+      <div className="absolute overflow-hidden left-0 bottom-0 right-0">
         <Image
-          src={masskaraSet}
-          alt="GDG & WTM Logo"
+          src={wave}
+          alt="RGBY Wave"
           priority
-          className="absolute -bottom-7 -right-14 z-20"
-          height={500}
-        />
-        <Image
-          src={gdgWtmLogo}
-          alt="GDG & WTM Logo"
-          priority
-          className="absolute bottom-7 left-7 z-20"
-          height={350}
-        />
-        <div className="absolute overflow-hidden text-black  left-0 bottom-0 right-0">
-          <Image
-            src={waveColors}
-            alt="RGBY Wave"
-            priority
-            className="object-cover object-left z-10 relative"
-          />
-        </div>
-        <Image
-          src={whitePaperTexture}
-          alt="White Paper Texture"
-          className="opacity-50 absolute left-0 top-0 object-cover h-screen w-screen"
+          className="pointer-events-none object-cover object-left z-20 relative"
         />
       </div>
     </section>

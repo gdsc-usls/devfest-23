@@ -7,7 +7,13 @@ import localFont from "next/font/local";
 import { useRouter } from "next/router";
 import { doc } from "firebase/firestore";
 import { useDocumentOnce } from "react-firebase-hooks/firestore";
-import { FormEventHandler, useCallback, useRef, useState } from "react";
+import {
+  FormEventHandler,
+  Suspense,
+  useCallback,
+  useRef,
+  useState,
+} from "react";
 
 import { db } from "@/config/firebase";
 import Button from "@/components/Button";
@@ -15,7 +21,7 @@ import { Icons } from "@/components/Icons";
 import { Attendee } from "@/types";
 
 const googleBold = localFont({
-  src: "../../assets/fonts/Google-Sans-Bold.woff2",
+  src: "../../../public/fonts/Google-Sans-Bold.woff2",
   display: "swap",
   weight: "600",
   variable: "--font-google-bold",
@@ -86,6 +92,8 @@ export default function Cert() {
                 email: data.email,
                 imgUrl,
                 day: data?.day,
+                firstName: data?.firstName,
+                lastName: data?.lastName,
               }),
             });
 
@@ -108,7 +116,7 @@ export default function Cert() {
   return (
     <form
       onSubmit={handleSendEmail}
-      className="flex flex-col items-center justify-center min-h-screen px-8"
+      className="flex flex-col items-center justify-center min-h-screen px-8 z-50 relative"
     >
       {loading ? (
         <Icons.spinner className="w-6 h-6" />
@@ -118,15 +126,17 @@ export default function Cert() {
         <>
           <Tilt className="rounded-xl overflow-hidden relative">
             <div ref={cardRef} className="grid place-items-center">
-              <Image
-                priority
-                quality={100}
-                width={1864}
-                height={1190}
-                src={`/images/certificates/cert-day${data.day}.png`}
-                className="object-contain w-full h-auto max-w-[800px] pointer-events-none"
-                alt="sample image"
-              />
+              <Suspense fallback={<Icons.spinner className="w-6 h-6" />}>
+                <Image
+                  priority
+                  quality={100}
+                  width={1864}
+                  height={1190}
+                  src={`/images/certificates/cert-day${data.day}.png`}
+                  className="object-contain w-full h-auto max-w-[800px] pointer-events-none"
+                  alt="sample image"
+                />
+              </Suspense>
 
               <h2
                 className={`absolute z-10 md:mt-20 mt-12 text-[#171717] text-4xl [font-size:clamp(18px,3vw,40px)] ${googleBold.className}`}

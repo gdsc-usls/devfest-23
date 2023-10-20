@@ -16,9 +16,16 @@ import * as React from "react";
 type Props = {
   id: string;
   day: number;
+  firstName: string;
+  lastName: string;
 };
 
-export const CertificateEmail = ({ id, day = 1 }: Props) => {
+export const CertificateEmail = ({
+  id,
+  day = 1,
+  firstName,
+  lastName,
+}: Props) => {
   const previewText = "Claim Your Certificate!";
 
   return (
@@ -31,9 +38,12 @@ export const CertificateEmail = ({ id, day = 1 }: Props) => {
             <Heading className="text-black text-[24px] font-normal text-center p-0 my-[30px] mx-0">
               <strong>GDG Bacolod</strong>
             </Heading>
+            <Text>
+              Hello {firstName} {lastName},
+            </Text>
             <Text className="text-black text-[14px] leading-[24px]">
               We&apos;re excited to let you know that your certificate for Day{" "}
-              {day} of Google DevFest 2023 is ready and waiting for you. 🎉 To
+              {day} of <strong>Google DevFest 2023</strong> is ready and waiting for you. 🎉 To
               claim it, just click the button below or check out the attached
               image:
             </Text>
