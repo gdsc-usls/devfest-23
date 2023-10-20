@@ -2,18 +2,17 @@ import { Menu, Transition } from "@headlessui/react";
 import { Dispatch, Fragment, SetStateAction } from "react";
 
 export default function Dropdown({
+  day,
   setDay,
 }: {
+  day: 1 | 2;
   setDay: Dispatch<SetStateAction<2 | 1>>;
 }) {
   return (
     <Menu as="div" className="w-full h-full relative">
       <div className="w-full h-full">
-        <Menu.Button
-          onClick={() => setDay(2)}
-          className="cursor-pointer transition-all bg-blue-500 text-white px-6 py-2 rounded-lg border-blue-600 border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px] w-full flex sm:gap-4 gap-1 justify-center items-center h-full font-medium text-sm sm:text-base lg:text-lg"
-        >
-          Options
+        <Menu.Button className="cursor-pointer transition-all bg-blue-500 text-white px-6 py-2 rounded-lg border-blue-600 border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px] w-full flex sm:gap-4 gap-1 justify-center items-center h-full font-medium text-sm sm:text-base lg:text-lg">
+          Day {day}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -44,9 +43,11 @@ export default function Dropdown({
             <Menu.Item>
               {({ active }) => (
                 <button
+                  disabled={process.env.NEXT_PUBLIC_DAY === "2"}
+                  onClick={() => setDay(1)}
                   className={`${
                     active ? "bg-blue-500 text-white" : "text-gray-900"
-                  } group flex w-full  items-center rounded-md px-2 py-2 text-sm`}
+                  } group flex w-full  items-center rounded-md px-2 py-2 text-sm disabled:opacity-50 disabled:cursor-not-allowed`}
                 >
                   Day 1
                 </button>
@@ -55,9 +56,11 @@ export default function Dropdown({
             <Menu.Item>
               {({ active }) => (
                 <button
+                  disabled={process.env.NEXT_PUBLIC_DAY === "1"}
+                  onClick={() => setDay(2)}
                   className={`${
                     active ? "bg-blue-500 text-white" : "text-gray-900"
-                  } group flex w-full  items-center rounded-md px-2 py-2 text-sm`}
+                  } group flex w-full  items-center rounded-md px-2 py-2 text-sm disabled:opacity-50 disabled:cursor-not-allowed`}
                 >
                   Day 2
                 </button>
