@@ -7,12 +7,7 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {
-      fontFamily: {
-        "google-reg": ["Google Sans Regular", "sans-serif"],
-        "google-bold": ["Google Sans Bold", "sans-serif"],
-      },
-    },
+    extend: {},
   },
   plugins: [],
 };

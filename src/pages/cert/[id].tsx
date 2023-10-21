@@ -132,7 +132,7 @@ export default function Cert() {
                   quality={100}
                   width={1864}
                   height={1190}
-                  src={`/images/certificates/cert-day${data.day}.png`}
+                  src={`/images/certificate.png`}
                   className="object-contain w-full h-auto max-w-[800px] pointer-events-none"
                   alt="sample image"
                 />

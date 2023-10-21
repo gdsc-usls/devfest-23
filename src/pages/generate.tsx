@@ -1,9 +1,10 @@
 import { FormEventHandler, useState } from "react";
-import { collection, getDocs, limit, query, where } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import localFont from "next/font/local";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
+import { nanoid } from "nanoid";
 import Image from "next/image";
 import { toast } from "sonner";
 
@@ -18,6 +19,7 @@ import {
 } from "../../public";
 
 import { db } from "@/config/firebase";
+import Dropdown from "@/components/Dropdown";
 
 const googleMedium = localFont({
   src: "../../public/fonts/Google-Sans-Medium.ttf",
@@ -29,37 +31,32 @@ const googleMedium = localFont({
 export default function Home() {
   const { push } = useRouter();
 
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [day, setDay] = useState<1 | 2>(1);
 
-  const handleLocate: FormEventHandler = async (e) => {
+  const handleGenerate: FormEventHandler = async (e) => {
     e.preventDefault();
-
-    const q = query(
-      collection(db, "certificates"),
-      where("email", "==", email),
-      limit(1)
-    );
+    const code = nanoid(10);
 
     try {
-      const querySnapshot = await getDocs(q);
-      let message = "⚠️ No certificate found";
-
-      querySnapshot.forEach((doc) => {
-        if (doc.data().email) {
-          push(`/cert/${doc.id}`);
-          message = "✅ Certificate found!";
-          return;
-        }
+      await setDoc(doc(db, "certificates", code), {
+        firstName,
+        lastName,
+        email,
+        day,
       });
 
-      toast(message);
+      toast.success("Certificate Generated!");
+      push(`/cert/${code}`);
     } catch (err: any) {
       toast.error(err.message);
     }
   };
 
   return (
-    <section className="h-screen lg:py-20 py-10 relative font-google-reg">
+    <section className="h-screen lg:py-20 py-10 relative">
       <Image
         height={250}
         src={kite}
@@ -96,9 +93,25 @@ export default function Home() {
           <Image src={devfestMain} alt="DevFest logo" priority height={180} />
 
           <form
-            onSubmit={handleLocate}
+            onSubmit={handleGenerate}
             className="flex flex-col gap-2 mt-8 w-full sm:max-w-[400px] max-w-[350px] text-black"
           >
+            <div className="flex gap-2 [&>input]:bg-white">
+              <Input
+                required
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                type="text"
+                placeholder="First Name"
+              />
+              <Input
+                required
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                type="text"
+                placeholder="Last Name"
+              />
+            </div>
             <Input
               required
               value={email}
@@ -106,12 +119,17 @@ export default function Home() {
               type="email"
               placeholder="Enter your email"
             />
-            <Button
-              type="submit"
-              className={`cursor-pointer transition-all bg-blue-500 text-white px-6 py-2 rounded-lg border-blue-600 border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px] w-full ${googleMedium.className}`}
+            <div
+              className={`flex gap-2 w-full font-google-bold ${googleMedium.className}`}
             >
-              Claim
-            </Button>
+              <Dropdown day={day} setDay={setDay} />
+              <Button
+                type="submit"
+                className="cursor-pointer transition-all bg-green-500 text-white px-6 py-2 rounded-lg border-green-600 border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px] w-full"
+              >
+                Generate
+              </Button>
+            </div>
           </form>
         </div>
       </div>
