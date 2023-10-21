@@ -92,7 +92,7 @@ export default function Manage() {
     return (
       <form
         onSubmit={handleLogin}
-        className="flex space-x-2 mt-40 w-full sm:max-w-[400px] max-w-[350px] mx-auto bg-black"
+        className="flex space-x-2 mt-40 w-full sm:max-w-[400px] max-w-[350px] mx-auto z-10 relative"
       >
         <Input
           required
@@ -100,9 +100,9 @@ export default function Manage() {
           placeholder="Enter password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="bg-transparent border rounded border-zinc-600 px-4 outline-none w-full text-sm sm:text-base"
+          className="bg-transparent border rounded-md border-zinc-600 px-4 outline-none w-full text-sm sm:text-base"
         />
-        <Button disabled={loading} type="submit">
+        <Button className="rounded-md bg-black text-white" type="submit">
           Login
         </Button>
       </form>

@@ -3,5 +3,4 @@ export type Attendee = {
   firstName: string;
   lastName: string;
   email: string;
-  day: 1 | 2;
 };

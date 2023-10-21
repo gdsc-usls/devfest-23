@@ -19,7 +19,6 @@ import {
 } from "../../public";
 
 import { db } from "@/config/firebase";
-import Dropdown from "@/components/Dropdown";
 
 const googleMedium = localFont({
   src: "../../public/fonts/Google-Sans-Medium.ttf",
@@ -34,7 +33,9 @@ export default function Home() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [day, setDay] = useState<1 | 2>(1);
+
+  const [authorized, setAuthorized] = useState(false);
+  const [password, setPassword] = useState("");
 
   const handleGenerate: FormEventHandler = async (e) => {
     e.preventDefault();
@@ -45,7 +46,6 @@ export default function Home() {
         firstName,
         lastName,
         email,
-        day,
       });
 
       toast.success("Certificate Generated!");
@@ -54,6 +54,36 @@ export default function Home() {
       toast.error(err.message);
     }
   };
+
+  const handleLogin: React.FormEventHandler = (e) => {
+    e.preventDefault();
+
+    if (password === process.env.NEXT_PUBLIC_PASSWORD) {
+      setAuthorized(true);
+      toast.success("Login successful");
+    } else {
+      toast.error("Incorrect password");
+    }
+  };
+
+  if (!authorized) {
+    return (
+      <form
+        onSubmit={handleLogin}
+        className="flex space-x-2 mt-40 w-full sm:max-w-[400px] max-w-[350px] mx-auto z-10 relative"
+      >
+        <Input
+          required
+          type="password"
+          placeholder="Enter password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="bg-transparent border rounded-md border-zinc-600 px-4 outline-none w-full text-sm sm:text-base"
+        />
+        <Button className="rounded-md bg-black text-white" type="submit">Login</Button>
+      </form>
+    );
+  }
 
   return (
     <section className="h-screen lg:py-20 py-10 relative">
@@ -119,17 +149,12 @@ export default function Home() {
               type="email"
               placeholder="Enter your email"
             />
-            <div
-              className={`flex gap-2 w-full font-google-bold ${googleMedium.className}`}
+            <Button
+              type="submit"
+              className={`cursor-pointer transition-all bg-green-500 text-white px-6 py-2 rounded-lg border-green-600 border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px] w-full ${googleMedium.className}`}
             >
-              <Dropdown day={day} setDay={setDay} />
-              <Button
-                type="submit"
-                className="cursor-pointer transition-all bg-green-500 text-white px-6 py-2 rounded-lg border-green-600 border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px] w-full"
-              >
-                Generate
-              </Button>
-            </div>
+              Generate
+            </Button>
           </form>
         </div>
       </div>
