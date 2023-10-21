@@ -1,8 +1,12 @@
 import { FormEventHandler, useState } from "react";
+import { doc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
+import localFont from "next/font/local";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
+import { nanoid } from "nanoid";
 import Image from "next/image";
+import { toast } from "sonner";
 
 import {
   gdgLogo,
@@ -14,11 +18,7 @@ import {
   sugarcane,
 } from "../../public";
 
-import { toast } from "sonner";
-import { doc, setDoc } from "firebase/firestore";
 import { db } from "@/config/firebase";
-import { nanoid } from "nanoid";
-import localFont from "next/font/local";
 import Dropdown from "@/components/Dropdown";
 
 const googleMedium = localFont({
