@@ -127,7 +127,13 @@ export default function Cert() {
         <>
           <Tilt className="rounded-xl overflow-hidden relative">
             <div ref={cardRef} className="grid place-items-center">
-              <Suspense fallback={<Icons.spinner className="w-6 h-6" />}>
+              <Suspense
+                fallback={
+                  <div className="h-[565px]">
+                    <Icons.spinner className="w-6 h-6" />
+                  </div>
+                }
+              >
                 <Image
                   priority
                   quality={100}
@@ -140,7 +146,7 @@ export default function Cert() {
               </Suspense>
 
               <h2
-                className={`absolute z-10 md:mt-20 mt-12 text-[#171717] text-4xl [font-size:clamp(18px,3vw,40px)] ${googleBold.className}`}
+                className={`absolute z-10 md:mt-20 mt-12 text-[#171717] text-4xl [font-size:clamp(18px,3vw,40px)] uppercase ${googleBold.className}`}
               >
                 {data.firstName} {data.lastName}
               </h2>
