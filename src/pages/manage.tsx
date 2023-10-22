@@ -28,17 +28,21 @@ export default function Manage() {
     try {
       let invalid = false;
       const _parsedAttendees: Attendee[] = JSON.parse(attendees);
-      _parsedAttendees.forEach((m) => {
+      _parsedAttendees.forEach((m, i) => {
         const data = schema.safeParse(m);
         if (!data.success) {
           toast.error("Contains invalid data");
+          console.log(i, data.error, m);
           invalid = true;
           return;
         }
       });
 
+      setLoading(false);
+      if (invalid) return;
+
       toast.success("Parsed successfully");
-      setParsedAttendees(invalid ? [] : _parsedAttendees);
+      setParsedAttendees(_parsedAttendees);
     } catch {
       toast.error("Invalid JSON format");
     }
@@ -160,14 +164,16 @@ export default function Manage() {
               {parsedAttendees.map((m) => {
                 return (
                   <div
-                    key={m.id}
+                    key={nanoid()}
                     className="pb-6 border-b border-zinc-700 flex space-x-8"
                   >
                     <div className="text-zinc-400">
+                      <p>Email:</p>
                       <p>First Name</p>
                       <p>Last Name</p>
                     </div>
                     <div>
+                      <p>{m.email}</p>
                       <p>{m.firstName}</p>
                       <p>{m.lastName}</p>
                     </div>
