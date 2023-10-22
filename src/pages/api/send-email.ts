@@ -8,13 +8,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const { method, body } = req;
     switch (method) {
       case "POST": {
-        const { id, email, imgUrl, day, firstName, lastName } = body;
+        const { id, email, imgUrl, firstName, lastName } = body;
 
         try {
           await handleSendEmail({
             to: email,
-            subject: `Certificate: Google DevFest 2023 — Day ${day}`,
-            html: render(Email({ id, day, firstName, lastName })),
+            subject: "Certificate: Google DevFest 2023",
+            html: render(Email({ id, firstName, lastName })),
             attachments: [
               {
                 filename: `Certificate_${id}.png`,
