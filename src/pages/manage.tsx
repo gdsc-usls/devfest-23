@@ -110,7 +110,7 @@ export default function Manage() {
   }
 
   return (
-    <div className="bg-black">
+    <div className="bg-black relative z-10">
       <form className="max-w-screen-sm py-20 mx-auto text-white flex flex-col">
         <div>
           <h1 className="mb-2 text-2xl font-bold mt-24">Import Certificates</h1>
@@ -139,13 +139,13 @@ export default function Manage() {
   {
     "firstName": "John",
     "lastName": "Doe",
-    "email": john@doe.com"
+    "email": "john@doe.com"
   },
   {
     "firstName": "Sally",
     "lastName": "Smith",
-    "email": sally@smith.com"
-  },
+    "email": "sally@smith.com"
+  }
 ]
     `}
           </code>
@@ -164,12 +164,12 @@ export default function Manage() {
                     className="pb-6 border-b border-zinc-700 flex space-x-8"
                   >
                     <div className="text-zinc-400">
-                      <p>Certificate ID</p>
-                      <p>Full Name</p>
+                      <p>First Name</p>
+                      <p>Last Name</p>
                     </div>
                     <div>
-                      <p>{m.id}</p>
                       <p>{m.firstName}</p>
+                      <p>{m.lastName}</p>
                     </div>
                   </div>
                 );
