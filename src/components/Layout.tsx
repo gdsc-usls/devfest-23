@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import Image from "next/image";
 import bg from "@/images/bg.jpg";
+import Footer from "./Footer";
 
 export default function Layout({
   className,
@@ -22,6 +23,8 @@ export default function Layout({
           className="pointer-events-none object-left z-10 relative opacity-50"
         />
       </div>
+
+      <Footer />
     </main>
   );
 }
