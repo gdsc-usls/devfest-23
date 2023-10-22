@@ -109,7 +109,7 @@ export default function Cert() {
           setImgLoading(false);
         });
     },
-    [cardRef, value?.id, data.email]
+    [cardRef, value?.id, data.email, data.firstName, data.lastName]
   );
 
   return (
