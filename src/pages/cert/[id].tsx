@@ -91,7 +91,6 @@ export default function Cert() {
                 id: value?.id,
                 email: data.email,
                 imgUrl,
-                day: data?.day,
                 firstName: data?.firstName,
                 lastName: data?.lastName,
               }),
@@ -110,7 +109,7 @@ export default function Cert() {
           setImgLoading(false);
         });
     },
-    [cardRef, value?.id, data.email, data?.day]
+    [cardRef, value?.id, data.email]
   );
 
   return (
