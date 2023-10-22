@@ -8,15 +8,13 @@ import { nanoid } from "nanoid";
 import Image from "next/image";
 import { toast } from "sonner";
 
-import {
-  gdgLogo,
-  devfestMain,
-  wave,
-  firebase,
-  mask,
-  kite,
-  sugarcane,
-} from "../../public";
+import kite from "@/images/kite.svg";
+import mask from "@/images/mask.png";
+import wave from "@/images/wave.svg";
+import gdgLogo from "@/images/gdg-logo.png";
+import firebase from "@/images/firebase.png";
+import sugarcane from "@/images/sugarcane.png";
+import devfestMain from "@/images/devfest-main.png";
 
 import { db } from "@/config/firebase";
 
@@ -42,7 +40,7 @@ export default function Home() {
     const code = nanoid(10);
 
     try {
-      await setDoc(doc(db, "certificates", code), {
+      await setDoc(doc(db, "certificates/devfest23/for", code), {
         firstName,
         lastName,
         email,
@@ -80,7 +78,9 @@ export default function Home() {
           onChange={(e) => setPassword(e.target.value)}
           className="bg-transparent border rounded-md border-zinc-600 px-4 outline-none w-full text-sm sm:text-base"
         />
-        <Button className="rounded-md bg-black text-white" type="submit">Login</Button>
+        <Button className="rounded-md bg-black text-white" type="submit">
+          Login
+        </Button>
       </form>
     );
   }
