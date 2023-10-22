@@ -28,6 +28,7 @@ export default function Home() {
   const { push } = useRouter();
 
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleLocate: FormEventHandler = async (e) => {
     e.preventDefault();
@@ -39,6 +40,7 @@ export default function Home() {
     );
 
     try {
+      setLoading(true);
       const querySnapshot = await getDocs(q);
       let message = "⚠️ No certificate found";
 
@@ -51,8 +53,10 @@ export default function Home() {
       });
 
       toast(message);
+      setLoading(false);
     } catch (err: any) {
       toast.error(err.message);
+      setLoading(false);
     }
   };
 
@@ -106,7 +110,8 @@ export default function Home() {
             />
             <Button
               type="submit"
-              className={`cursor-pointer transition-all bg-blue-500 text-white px-6 py-2 rounded-lg border-blue-600 border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px] w-full ${googleMedium.className}`}
+              disabled={loading}
+              className={`cursor-pointer transition-all bg-blue-500 text-white px-6 py-2 rounded-lg border-blue-600 border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px] w-full disabled:cursor-not-allowed ${googleMedium.className}`}
             >
               Claim
             </Button>
