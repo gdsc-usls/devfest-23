@@ -15,17 +15,11 @@ import * as React from "react";
 
 type Props = {
   id: string;
-  day: number;
   firstName: string;
   lastName: string;
 };
 
-export const CertificateEmail = ({
-  id,
-  day = 1,
-  firstName,
-  lastName,
-}: Props) => {
+export const CertificateEmail = ({ id, firstName, lastName }: Props) => {
   const previewText = "Claim Your Certificate!";
 
   return (
@@ -42,17 +36,17 @@ export const CertificateEmail = ({
               Hello {firstName} {lastName},
             </Text>
             <Text className="text-black text-[14px] leading-[24px]">
-              We&apos;re excited to let you know that your certificate for Day{" "}
-              {day} of <strong>Google DevFest 2023</strong> is ready and waiting for you. 🎉 To
-              claim it, just click the button below or check out the attached
-              image:
+              We&apos;re excited to let you know that your certificate for{" "}
+              <strong>Google DevFest 2023</strong> is ready and waiting for you.
+              🎉 To claim it, just click the button below or check out the
+              attached image:
             </Text>
             <Section className="text-center mt-[32px] mb-[32px]">
               <Button
                 pX={20}
                 pY={12}
                 className="bg-blue-600 rounded text-white text-[12px] font-semibold no-underline text-center"
-                href={`https://devfest.omsimos.com/cert/${id}`}
+                href={`https://devfest23.omsimos.com/cert/${id}`}
               >
                 Claim Certificate
               </Button>
