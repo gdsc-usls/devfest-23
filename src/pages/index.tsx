@@ -7,17 +7,15 @@ import Input from "@/components/Input";
 import Image from "next/image";
 import { toast } from "sonner";
 
-import {
-  gdgLogo,
-  devfestMain,
-  wave,
-  firebase,
-  mask,
-  kite,
-  sugarcane,
-} from "../../public";
-
 import { db } from "@/config/firebase";
+
+import kite from "@/images/kite.svg";
+import mask from "@/images/mask.png";
+import wave from "@/images/wave.svg";
+import gdgLogo from "@/images/gdg-logo.png";
+import firebase from "@/images/firebase.png";
+import sugarcane from "@/images/sugarcane.png";
+import devfestMain from "@/images/devfest-main.png";
 
 const googleMedium = localFont({
   src: "../../public/fonts/Google-Sans-Medium.ttf",

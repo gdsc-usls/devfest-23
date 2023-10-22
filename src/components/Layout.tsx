@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import Image from "next/image";
-import { bg, kite, firebase, mask, sugarcane } from "../../public";
+import bg from "@/images/bg.jpg";
 
 export default function Layout({
   className,
