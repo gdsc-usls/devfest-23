@@ -35,7 +35,7 @@ export default function Home() {
     e.preventDefault();
 
     const q = query(
-      collection(db, "certificates"),
+      collection(db, "certificates/devfest23/for"),
       where("email", "==", email),
       limit(1)
     );

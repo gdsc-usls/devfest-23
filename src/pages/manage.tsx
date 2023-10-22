@@ -55,7 +55,7 @@ export default function Manage() {
     try {
       parsedAttendees.forEach(async (attendee) => {
         try {
-          await setDoc(doc(db, "certificates", nanoid(10)), {
+          await setDoc(doc(db, "certificates/devfest23/for", nanoid(10)), {
             firstName: attendee.firstName,
             lastName: attendee.lastName,
             email: attendee.email,
