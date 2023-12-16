@@ -11,18 +11,16 @@ export default function Layout({
   children: ReactNode;
 }) {
   return (
-    <main
-      className={`bg-white min-h-screen mx-auto font-google-reg ${className}`}
-    >
+    <main className={`bg-white mx-auto font-google-reg ${className}`}>
       {children}
-      <div className="absolute h-full overflow-hidden text-black left-0 bottom-0 right-0">
-        <Image
-          src={bg}
-          alt="Grid bg"
-          priority
-          className="pointer-events-none object-left z-10 relative opacity-50"
-        />
-      </div>
+      <Image
+        src="/images/bg.jpg"
+        width={1920}
+        height={1080}
+        alt="Grid bg"
+        priority
+        className="pointer-events-none object-cover absolute h-full top-0 left-0 z-10 opacity-50"
+      />
 
       <Footer />
     </main>
