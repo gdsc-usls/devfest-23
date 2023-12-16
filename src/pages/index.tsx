@@ -61,7 +61,7 @@ export default function Home() {
   };
 
   return (
-    <section className="h-screen lg:py-20 py-10 relative font-google-reg">
+    <section className="min-h-screen py-10 lg:py-20 relative font-google-reg pb-40">
       <Image
         height={250}
         src={kite}
@@ -86,8 +86,8 @@ export default function Home() {
         alt="Sugarcane"
         className="absolute right-20 bottom-0 z-40 pointer-events-none hidden lg:block"
       />
-      <div className="glassmorph h-full z-30 relative w-[90%] px-7 md:w-3/4 mx-auto">
-        <div className="gap-5 flex flex-col h-full items-center pt-28">
+      <div className="glassmorph min-h-fit z-30 relative w-[90%] px-7 md:w-3/4 mx-auto">
+        <div className="gap-5 flex flex-col items-center pt-28 pb-56">
           <Image
             src={gdgLogo}
             alt="GDG logo"
